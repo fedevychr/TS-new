@@ -157,14 +157,14 @@ import "./style.css";
 
 // Interface:
 
-interface User {
-  name: string;
-  age: number;
-  lastName?: string; // Optional property (?)
-  sayHello(): string;
-  sayBay(): void;
-  showAge(userAge: number): string;
-}
+// interface User {
+//   name: string;
+//   age: number;
+//   lastName?: string; // Optional property (?)
+//   sayHello(): string;
+//   sayBay(): void;
+//   showAge(userAge: number): string;
+// }
 
 // type User = {
 //     userName: string;
@@ -185,16 +185,226 @@ interface User {
 //   },
 // };
 
-const student: User = {
-  name: "Bob",
-  age: 12,
-  sayHello() {
-    return "Hello";
-  },
-  sayBay() {
-    console.log("Bay");
-  },
-  showAge(userAge) {
-    return `My age is ${userAge}`;
-  },
-};
+// const student: User = {
+//   name: "Bob",
+//   age: 12,
+//   sayHello() {
+//     return "Hello";
+//   },
+//   sayBay() {
+//     console.log("Bay");
+//   },
+//   showAge(userAge) {
+//     return `My age is ${userAge}`;
+//   },
+// };
+
+//////////////////////////////////////////////
+
+// Index Properties:
+
+// interface List {
+//   [key: string]: number | null;
+// }
+
+// type Fruits = {
+//   apples: number;
+//   bananas: number;
+//   oranges: number;
+// };
+
+// const fruits: List = {
+//   apples: 10,
+//   bananas: 15,
+//   oranges: 25,
+//   pineapples: 10,
+//   peaches: null,
+// };
+
+// const electronics: List = {
+//   phone: 20,
+//   tables: 10,
+//   monitors: 23,
+// };
+
+// Generic:
+
+// Array:
+
+// function getFirstElement<T>(array: T[]): T | undefined {
+//   return array[0];
+// }
+
+// numberArray
+// function getFirstElement<T>(array: number[]) : number {
+//   return array[0];
+// }
+
+// stringArray
+// function getFirstElement<T>(array: string[]) : string {
+//   return array[0];
+// }
+
+// objectArray
+// function getFirstElement<T>(array: { name: string}[]) : { name: string} {
+//   return array[0];
+// }
+
+// const numberArray = [10, 20, 30];
+// const stringArray = ["hello", "world", "typescript"];
+// const objectArray = [{ name: "Alice" }, { name: "Bob" }];
+
+// console.log(getFirstElement(numberArray)); // Output: 10
+// console.log(getFirstElement(stringArray)); // Output: "hello"
+// console.log(getFirstElement(objectArray)); // Output: { name: "Alice"
+
+// Object:
+// function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+//   return obj[key];
+// }
+
+// const person = {
+//   name: "John",
+//   age: 30,
+//   occupation: "Engineer",
+//   gender: "Male",
+// };
+
+// const name = getProperty(person, "name"); // Output: "John"
+// const age = getProperty(person, "age"); // Output: 30
+// const gender = getProperty(person, "gender"); // undefined
+
+// Partial:
+
+// interface UserProfile {
+//   username: string;
+//   email: string;
+//   age: number;
+// }
+
+// const originalProfile: UserProfile = {
+//   username: "johndoe",
+//   email: "john.doe@example.com",
+//   age: 28,
+// };
+
+// function updateProfile(profile: UserProfile, updates: Partial<UserProfile>) {
+//   return { ...profile, ...updates };
+// }
+
+// const updatedProfile = updateProfile(originalProfile, {
+//   email: "new.john.doe@example.com",
+//   age: 29,
+// });
+
+//  Readonly:
+
+// interface User {
+//   id: number;
+//   name: string;
+// }
+
+// const user: Readonly<User> = {
+//   id: 100,
+//   name: "Bob",
+// };
+
+// user.id = 201;
+// user.name = "Alice";
+
+// Pick<T, K>:
+
+// interface Employee {
+//   id: number;
+//   name: string;
+//   email: string;
+//   department: string;
+//   hireDate: Date;
+// }
+
+// const fullEmployeeInfo: Employee = {
+//   id: 101,
+//   name: "John Doe",
+//   email: "john.doe@example.com",
+//   department: "Engineering",
+//   hireDate: new Date("2020-01-10"),
+// };
+
+// function displayInfo(
+//   fullEmployeeInfo: Employee
+// ): Pick<Employee, "name" | "email"> {
+//   return {
+//     name: fullEmployeeInfo.name,
+//     email: fullEmployeeInfo.email,
+//   };
+// }
+
+// interface BasicInfo {
+//   name: string;
+//   email: string;
+// }
+
+// function displayInfo(fullEmployeeInfo: Employee): BasicInfo {
+//   return {
+//     name: fullEmployeeInfo.name,
+//     email: fullEmployeeInfo.email,
+//   };
+// }
+
+// Omit<T, K>:
+
+// interface Employee {
+//   id: number;
+//   name: string;
+//   email: string;
+//   department: string;
+//   hireDate: Date; // hide info
+// }
+
+// const fullEmployeeInfo: Employee = {
+//   id: 101,
+//   name: "John Doe",
+//   email: "john.doe@example.com",
+//   department: "Engineering",
+//   hireDate: new Date("2020-01-10"),
+// };
+
+// function displayInfo(fullEmployeeInfo: Employee): Omit<Employee, "hireDate"> {
+//   return {
+//     name: fullEmployeeInfo.name,
+//     email: fullEmployeeInfo.email,
+//     department: fullEmployeeInfo.department,
+//     id: fullEmployeeInfo.id,
+//   };
+// }
+
+// Record<K, T>:
+
+// interface List {
+//   [key: string]: number | null;
+// }
+
+// function recordTemperatures(temps: number[]): Record<string, number> {
+//   let temperatureRecord: Record<string, number> = {};
+
+//   temps.forEach((temp, index) => {
+//     temperatureRecord[`day${index + 1}`] = temp;
+//   });
+
+//   return temperatureRecord;
+// }
+
+// // Example usage:
+// const weeklyTemps = [22, 24, 23, 25, 24, 26, 27];
+// const tempRecord = recordTemperatures(weeklyTemps);
+// console.log(tempRecord);
+
+// interface Employee {
+//   id: number;
+//   name: string;
+//   email: string;
+//   department: string;
+//   hireDate: Date; // hide info
+// }
+
+// type EmployeeBasicInfo = Omit<Employee, "hireDate">;
